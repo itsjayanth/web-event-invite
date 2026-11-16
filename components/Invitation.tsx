@@ -9,7 +9,6 @@ const loadFeatures = () => import('framer-motion').then((mod) => mod.domAnimatio
 import { EntryGate } from './EntryGate';
 import { Hero } from './Hero';
 import { MusicToggle } from './MusicToggle';
-import { NextSectionButton } from './NextSectionButton';
 import { ThreadLayer } from './ThreadLayer';
 import { ScrollProgress } from './thread/ScrollProgress';
 import { Beginning } from './sections/Beginning';
@@ -27,7 +26,6 @@ export function Invitation({ version }: { version: Version }) {
       <EntryGate>
         <ScrollProgress />
         <MusicToggle />
-        <NextSectionButton />
         <main>
           <Hero />
           <ThreadLayer>
