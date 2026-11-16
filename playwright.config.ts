@@ -36,7 +36,7 @@ export default defineConfig({
   },
   webServer: {
     command: `npm run build && npx serve out -l ${PORT} --no-clipboard`,
-    url: `http://localhost:${PORT}/friends`,
+    url: `http://localhost:${PORT}/`,
     reuseExistingServer: true,
     timeout: 240_000,
   },

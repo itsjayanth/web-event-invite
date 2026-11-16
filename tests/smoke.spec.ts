@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import { mkdirSync } from 'node:fs';
 
-const ROUTES = ['friends', 'family'] as const;
+const ROUTES = ['', 'family'] as const;
 const WIDTHS = [
   { width: 390, height: 844 },
   { width: 1440, height: 900 },
@@ -38,6 +38,7 @@ async function scrollThrough(page: Page) {
 }
 
 for (const route of ROUTES) {
+  const label = route === '' ? 'friends' : route;
   for (const vp of WIDTHS) {
     test(`/${route} @ ${vp.width}px`, async ({ page }) => {
       const errors: string[] = [];
@@ -77,7 +78,7 @@ for (const route of ROUTES) {
 
       mkdirSync('test-results/screenshots', { recursive: true });
       await page.screenshot({
-        path: `test-results/screenshots/${route}-${vp.width}.png`,
+        path: `test-results/screenshots/${label}-${vp.width}.png`,
         fullPage: true,
       });
 

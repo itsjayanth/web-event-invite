@@ -59,9 +59,8 @@ Lint clean, typecheck clean, build green. RSVP removal confirmed compiling.
 **Measured baseline (not an estimate):**
 ```
 Route          First Load JS
-/              103 kB
+/              184 kB
 /family        184 kB
-/friends       184 kB
 shared         103 kB  (chunks: 46.6 kB + 54.2 kB + 1.92 kB)
 ```
 This is pre-LazyMotion, pre-image-pipeline, pre-font-subsetting — i.e. before any of

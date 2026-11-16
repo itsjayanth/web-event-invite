@@ -2,12 +2,12 @@
 
 A static (Next.js 15 `output: 'export'`, App Router, TypeScript, Tailwind 3) wedding invitation with two versions:
 
-| Route      | Audience | Differences                                                                        |
-| ---------- | -------- | ---------------------------------------------------------------------------------- |
-| `/friends` | Friends  | Friends' blessings, all 8 moments, relaxed tone                                    |
-| `/family`  | Family   | Elders' blessings only, first 4 moments, shows the parents' note (Sr. Head Master) |
+| Route     | Audience | Differences                                                                        |
+| --------- | -------- | ----------------------------------------------------------------------------------- |
+| `/`       | Friends  | Friends' blessings, all 8 moments, relaxed tone                                    |
+| `/family` | Family   | Elders' blessings only, first 4 moments, shows the parents' note (Sr. Head Master) |
 
-`/` redirects to `/friends`. Both routes render the same sections with a `version` prop (`'friends' | 'family'`). The site is `noindex, nofollow`.
+`/` renders the friends version directly. Both routes render the same sections with a `version` prop (`'friends' | 'family'`). The site is `noindex, nofollow`.
 
 ## Run
 
@@ -58,7 +58,7 @@ Needs `ffmpeg` on PATH for video/audio (skipped with a message otherwise). Re-ru
 
 - Easiest: import the GitHub repo at vercel.com/new (framework: Next.js, defaults are fine).
 - CLI: `npx vercel` for a preview, `npx vercel --prod` for production.
-- `vercel.json` adds the `/` to `/friends` redirect, security headers, `noindex`, and caching (`/media/*` is cached for a day since filenames are stable, `/_next/static/*` is immutable).
+- `vercel.json` adds security headers, `noindex`, and caching (`/media/*` is cached for a day since filenames are stable, `/_next/static/*` is immutable).
 
 ### Custom domain
 

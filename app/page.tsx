@@ -1,5 +1,5 @@
-import { redirect } from 'next/navigation';
+import { Invitation } from '@/components/Invitation';
 
 export default function Home() {
-  redirect('/friends');
+  return <Invitation version="friends" />;
 }
