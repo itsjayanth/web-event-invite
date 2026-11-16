@@ -158,7 +158,7 @@ export function Families({ version }: { version: Version }) {
         <Heading text={f.heading} />
       </div>
       <div ref={gridRef} className="relative mx-auto mt-28 grid max-w-5xl gap-[72px] md:mt-36 md:grid-cols-2 md:gap-10 lg:gap-14">
-        {(['bride', 'groom'] as const).map((side, i) => (
+        {(['groom', 'bride'] as const).map((side, i) => (
           <div key={side} className="relative flex">
             {/* anchor for the gold thread: above the card, top-centre (kept outside the animated wrapper) */}
             <div data-thread-from={side} className="absolute -top-14 left-1/2 h-0 w-0" />

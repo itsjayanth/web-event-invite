@@ -50,7 +50,7 @@ export const wedding = {
     },
     groom: {
       label: 'The groom’s family',
-      parents: ['Smt. C. Manjula', 'Sri. G.N. Madappa Chettiar'],
+      parents: ['Sri. G.N. Madappa Chettiar', 'Smt. C. Manjula'],
       town: 'Hosakote',
       address: 'Papanna Layout, Hosakote Town, Bengaluru Rural District, Karnataka.',
       description: 'A warm, generous family who hold their traditions dear.',
@@ -112,13 +112,13 @@ export const wedding = {
   moments: {
     heading: 'Moments',
     kicker: 'A few frames from along the way.',
-    /** Family shows the first 4, friends shows all 5. */
-    photos: [1, 2, 3, 5, 6].map((n) => ({
+    /** Family shows the first 4, friends shows all 6. */
+    photos: [1, 2, 3, 5, 6, 7].map((n) => ({
       src: `/media/moment-${n}.jpg`,
       alt: `A moment along the way, photograph ${n}`,
       caption: '',
     })) as MediaRef[],
-    counts: { family: 4, friends: 5 },
+    counts: { family: 4, friends: 6 },
   },
 
   venue: {
