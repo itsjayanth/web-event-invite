@@ -1,6 +1,10 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useEntry } from './entry/context';
+
+const DURATION_MS = 2400;
+/** ease-in-out-sine: slow start, slow finish, no abrupt snap. */
+const ease = (t: number) => -(Math.cos(Math.PI * t) - 1) / 2;
 
 /** Fixed bottom-right affordance: taps smooth-scroll to the next `[data-section]`
  *  block instead of making the guest scroll to discover it. Hides once the
@@ -8,6 +12,7 @@ import { useEntry } from './entry/context';
 export function NextSectionButton() {
   const { entered } = useEntry();
   const [visible, setVisible] = useState(true);
+  const raf = useRef<number | null>(null);
 
   useEffect(() => {
     const onScroll = () => {
@@ -23,10 +28,42 @@ export function NextSectionButton() {
     };
   }, []);
 
+  useEffect(() => () => {
+    if (raf.current) cancelAnimationFrame(raf.current);
+  }, []);
+
   const goToNext = () => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-section]'));
     const next = sections.find((el) => el.getBoundingClientRect().top > window.innerHeight * 0.15);
-    (next ?? sections[sections.length - 1])?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const target = next ?? sections[sections.length - 1];
+    if (!target) return;
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const from = window.scrollY;
+    const to = from + target.getBoundingClientRect().top;
+    if (reduce) {
+      window.scrollTo(0, to);
+      return;
+    }
+
+    if (raf.current) cancelAnimationFrame(raf.current);
+    const cancel = () => {
+      if (raf.current) cancelAnimationFrame(raf.current);
+      raf.current = null;
+      window.removeEventListener('wheel', cancel);
+      window.removeEventListener('touchstart', cancel);
+    };
+    window.addEventListener('wheel', cancel, { passive: true });
+    window.addEventListener('touchstart', cancel, { passive: true });
+
+    const start = performance.now();
+    const step = (now: number) => {
+      const t = Math.min(1, (now - start) / DURATION_MS);
+      window.scrollTo(0, from + (to - from) * ease(t));
+      if (t < 1) raf.current = requestAnimationFrame(step);
+      else cancel();
+    };
+    raf.current = requestAnimationFrame(step);
   };
 
   return (
